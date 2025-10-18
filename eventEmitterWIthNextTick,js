@@ -1,0 +1,21 @@
+import EventEmitter from "node:events";
+
+// within the constructor itself, you can use process.nextTick() to set a callback
+//  to emit the event after the constructor has finished,
+// which provides the expected results
+
+class MyEmitter extends EventEmitter {
+  constructor() {
+    super();
+
+    // use nextTick to emit the event once a handler is assigned
+    process.nextTick(() => {
+      this.emit("event");
+    });
+  }
+}
+
+const myEmitter = new MyEmitter();
+myEmitter.on("event", () => {
+  console.log("an event occurred!");
+});
