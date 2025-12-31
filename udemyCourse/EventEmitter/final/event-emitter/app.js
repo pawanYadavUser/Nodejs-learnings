@@ -1,4 +1,4 @@
-const EventEmitter = require("events"); // or include ./events.js to use the custom implementation
+import EventEmitter from "events"; // or include ./events.js to use the custom implementation
 
 class Emitter extends EventEmitter {}
 
@@ -18,11 +18,15 @@ myE.on("foo", (x) => {
 });
 
 myE.once("bar", () => {
-  console.log("An event occurred bar.");
+  console.log("An event occurred bar once.");
 });
 
-// myE.emit("foo");
-// myE.emit("foo", "some text");
+myE.once("bar", () => {
+  console.log("An event occurred bar once again.");
+});
+
+myE.emit("foo");
+myE.emit("foo", "some text");
 
 myE.emit("bar");
 myE.emit("bar");
